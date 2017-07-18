@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="IBM437"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LostTech.Stack.Extensibility" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LostTech.Stack.Extensibility" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="WindowLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Margin" nillable="true" type="tns:Borders" />
+    </xs:sequence>
+    <xs:attribute name="CustomBorders" type="xs:boolean" />
+    <xs:attribute name="CustomChrome" type="xs:boolean" />
+    <xs:attribute name="MinHeight" type="xs:double" />
+    <xs:attribute name="MinWidth" type="xs:double" />
+  </xs:complexType>
+  <xs:element name="WindowLayout" nillable="true" type="tns:WindowLayout" />
+  <xs:complexType name="Borders">
+      <xs:attribute name="Bottom" type="xs:double" />
+      <xs:attribute name="Left" type="xs:double" />
+      <xs:attribute name="Right" type="xs:double" />
+      <xs:attribute name="Top" type="xs:double" />
+  </xs:complexType>
+  <xs:element name="Borders" nillable="true" type="tns:Borders" />
+</xs:schema>

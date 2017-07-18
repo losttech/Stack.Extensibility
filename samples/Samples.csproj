@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <AssemblyName>LostTech.Stack.Extensibility.Samples</AssemblyName>
+    <RootNamespace>LostTech.Stack</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Extensibility.csproj" />
+  </ItemGroup>
+
+</Project>
