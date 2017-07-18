@@ -4,7 +4,6 @@
     <TargetFramework>netstandard1.4</TargetFramework>
     <AssemblyName>LostTech.Stack.Extensibility</AssemblyName>
     <RootNamespace>LostTech.Stack</RootNamespace>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>

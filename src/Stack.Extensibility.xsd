@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LostTech.Stack.Extensibility" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LostTech.Stack.Extensibility" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LostTech.Stack.Extensibility"
+           targetNamespace="http://schemas.datacontract.org/2004/07/LostTech.Stack.Extensibility"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
   <xs:complexType name="WindowLayout">
     <xs:sequence>
       <xs:element minOccurs="0" name="Margin" nillable="true" type="tns:Borders" />
