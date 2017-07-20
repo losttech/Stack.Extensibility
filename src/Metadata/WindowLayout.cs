@@ -1,5 +1,6 @@
 ﻿namespace LostTech.Stack.Extensibility.Metadata
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Runtime.Serialization;
     using System.Xml.Serialization;
@@ -26,5 +27,13 @@
         [DataMember]
         [DefaultValue(null)]
         public Borders Margin { get; set; }
+        [XmlAttribute]
+        [DataMember]
+        [DefaultValue(double.PositiveInfinity)]
+        public double VerticalExpansion { get; set; } = double.PositiveInfinity;
+        [XmlAttribute]
+        [DataMember]
+        [DefaultValue(double.PositiveInfinity)]
+        public double HorizontalExpansion { get; set; } = double.PositiveInfinity;
     }
 }

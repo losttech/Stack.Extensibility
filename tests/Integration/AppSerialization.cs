@@ -1,7 +1,6 @@
 namespace LostTech.Stack.Extensibility
 {
     using System;
-    using System.Data;
     using System.IO;
     using System.Text;
     using System.Xml;
@@ -24,14 +23,17 @@ namespace LostTech.Stack.Extensibility
                         CustomBorders = true,
                         Margin = new Borders {
                             Left = 1,
-                        }
+                        },
+                        HorizontalExpansion = 32,
                     },
+                    Categories = { "Office", "Main" },
                 },
 
                 new Window {
                     Filters = {
                         new WindowFilter{ProcessFilter = new CommonStringMatchFilter{Match = CommonStringMatchFilter.MatchOption.Suffix, Value = "42"}},
                     },
+                    Roles = { "Main" },
                     Layout = new WindowLayout {
                         MinHeight = 42,
                     }
@@ -44,12 +46,14 @@ namespace LostTech.Stack.Extensibility
     <UnusedMetadata/>
     <Window>
         <Filter />
-        <Layout MinWidth = ""200"" CustomBorders=""true"">
+        <Layout MinWidth = ""200"" CustomBorders=""true"" VerticalExpansion=""32"">
             <Margin Left = ""1"" />
         </Layout>
+        <Role>Role!</Role>
     </Window>
 
     <Window>
+        <Category>12</Category>
         <Filter>
             <ProcessFilter Value=""42"" Match=""Suffix"" />
         </Filter>
@@ -77,15 +81,18 @@ namespace LostTech.Stack.Extensibility
 <App>
   <Window>
     <Filter />
-    <Layout MinWidth=""200"" CustomBorders=""true"">
+    <Layout MinWidth=""200"" CustomBorders=""true"" HorizontalExpansion=""32"">
       <Margin Left=""1"" />
     </Layout>
+    <Category>Office</Category>
+    <Category>Main</Category>
   </Window>
   <Window>
     <Filter>
       <ProcessFilter Value=""42"" Match=""Suffix"" />
     </Filter>
     <Layout MinHeight=""42"" />
+    <Role>Main</Role>
   </Window>
 </App>";
             Assert.AreEqual(expected, result);
@@ -96,6 +103,9 @@ namespace LostTech.Stack.Extensibility
             var textReader = new StringReader(SampleAppXml);
             var xmlReader = XmlReader.Create(textReader);
             var app = (App)Serializer.Deserialize(xmlReader);
+            Assert.AreEqual(32, app.Windows[0].Layout.VerticalExpansion);
+            Assert.AreEqual(1, app.Windows[1].Categories.Count);
+            Assert.AreEqual("Role!", app.Windows[0].Roles[0]);
             Assert.AreEqual(2, app.Windows.Count);
             Assert.AreEqual(2, app.Windows[1].Filters.Count);
         }
