@@ -48,7 +48,9 @@
 
             return true;
         }
-
+        /// <summary>
+        /// Filters windows by window class (Win32 only).
+        /// </summary>
         [DefaultValue(null)]
         public CommonStringMatchFilter ClassFilter {
             get => this.classFilter;
@@ -59,6 +61,9 @@
                 this.OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// Filters windows by their title.
+        /// </summary>
         [DefaultValue(null)]
         public CommonStringMatchFilter TitleFilter {
             get => this.titleFilter;
@@ -69,6 +74,9 @@
                 this.OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// Filters windows by their process name.
+        /// </summary>
         [DefaultValue(null)]
         public CommonStringMatchFilter ProcessFilter {
             get => this.processFilter;

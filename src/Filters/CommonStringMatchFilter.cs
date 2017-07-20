@@ -39,6 +39,10 @@
             Value = this.Value,
         };
 
+        /// <summary>
+        /// Matching mode. Default is <see cref="MatchOption.Anywhere"/>
+        /// </summary>
+        /// <seealso cref="MatchOption"/>
         [XmlAttribute]
         public MatchOption Match {
             get => this.match;

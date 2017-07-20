@@ -1,6 +1,7 @@
 ﻿namespace LostTech.Stack.Extensibility.Filters
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Xml.Serialization;
     using LostTech.App.DataBinding;
@@ -9,7 +10,11 @@
     {
         string value;
 
+        /// <summary>
+        /// String to search for
+        /// </summary>
         [XmlAttribute]
+        [DefaultValue(null)]
         public string Value
         {
             get => this.value;
