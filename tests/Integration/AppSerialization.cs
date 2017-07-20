@@ -104,6 +104,7 @@ namespace LostTech.Stack.Extensibility
             var xmlReader = XmlReader.Create(textReader);
             var app = (App)Serializer.Deserialize(xmlReader);
             Assert.AreEqual(32, app.Windows[0].Layout.VerticalExpansion);
+            Assert.IsTrue(double.IsPositiveInfinity(app.Windows[0].Layout.HorizontalExpansion));
             Assert.AreEqual(1, app.Windows[1].Categories.Count);
             Assert.AreEqual("Role!", app.Windows[0].Roles[0]);
             Assert.AreEqual(2, app.Windows.Count);
