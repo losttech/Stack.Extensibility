@@ -4,6 +4,14 @@
     <TargetFramework>net462</TargetFramework>
     <AssemblyName>LostTech.Stack.Extensibility</AssemblyName>
     <RootNamespace>LostTech.Stack.Extensibility</RootNamespace>
+    <Version>0.1</Version>
+    <Authors>Victor Milovanov</Authors>
+    <Company>Lost Tech LLC</Company>
+    <Product>Stack</Product>
+    <Description>Extensibility library and tools for Stack window manager</Description>
+    <PackageProjectUrl>https://github.com/losttech/Stack.Extensibility</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/losttech/Stack.Extensibility.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
