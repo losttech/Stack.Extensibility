@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using LostTech.App;
+    using System.Xml.Serialization;
     using LostTech.App.DataBinding;
 
     public class CommonStringMatchFilter : StringMatchFilter<string>, ICopyable<CommonStringMatchFilter>
@@ -39,6 +39,7 @@
             Value = this.Value,
         };
 
+        [XmlAttribute]
         public MatchOption Match {
             get => this.match;
             set {
@@ -60,5 +61,11 @@
             Suffix,
             Regex,
         }
+    }
+
+    public static class CommonStringMatchFilterExtensions
+    {
+        public static bool MatchesAnything(this CommonStringMatchFilter filter) =>
+            filter?.Value == null || filter.Value  == "" && filter.Match == CommonStringMatchFilter.MatchOption.Anywhere;
     }
 }

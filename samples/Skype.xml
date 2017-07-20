@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<WindowLayout xmlns="http://schemas.datacontract.org/2004/07/LostTech.Stack.Extensibility"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance https://raw.githubusercontent.com/losttech/Stack.Extensibility/master/src/Stack.Extensibility.xsd"
-
-              MinHeight="300"
-              MinWidth="200"
-/>

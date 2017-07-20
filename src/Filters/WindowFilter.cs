@@ -1,44 +1,55 @@
 ﻿namespace LostTech.Stack.Extensibility.Filters
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics;
-    using LostTech.App;
     using LostTech.App.DataBinding;
     using PInvoke;
     using Win32Exception = System.ComponentModel.Win32Exception;
 
     public sealed class WindowFilter : NotifyPropertyChangedBase, IFilter<IntPtr>, ICopyable<WindowFilter>
     {
-        CommonStringMatchFilter classFilter = new CommonStringMatchFilter();
-        CommonStringMatchFilter titleFilter = new CommonStringMatchFilter();
+        CommonStringMatchFilter classFilter;
+        CommonStringMatchFilter titleFilter;
+        CommonStringMatchFilter processFilter;
 
         public bool Matches(IntPtr windowHandle)
         {
             try
             {
-                if (!string.IsNullOrEmpty(this.ClassFilter?.Value))
-                {
+                if (!this.ClassFilter.MatchesAnything()) {
                     string className = User32.GetClassName(windowHandle, maxLength: 4096);
                     if (!this.ClassFilter.Matches(className))
                         return false;
                 }
 
-                if (!string.IsNullOrEmpty(this.TitleFilter?.Value))
-                {
+                if (!this.TitleFilter.MatchesAnything()) {
                     string title = User32.GetWindowText(windowHandle);
                     if (!this.TitleFilter.Matches(title))
                         return false;
                 }
+
+                if (!this.ProcessFilter.MatchesAnything()) {
+                    User32.GetWindowThreadProcessId(windowHandle, out int processID);
+                    if (processID != 0) {
+                        try {
+                            Process process = Process.GetProcessById(processID);
+                            if (!this.ProcessFilter.Matches(process.ProcessName))
+                                return false;
+                        } catch (ArgumentException) { } catch (InvalidOperationException) { }
+                    }
+                }
             }
             catch (Win32Exception e)
             {
-                Debug.WriteLine($"Can't obtain window class or title: {e}");
+                Debug.WriteLine($"Can't obtain window class, title or process name: {e}");
                 return false;
             }
 
             return true;
         }
 
+        [DefaultValue(null)]
         public CommonStringMatchFilter ClassFilter {
             get => this.classFilter;
             set {
@@ -48,6 +59,7 @@
                 this.OnPropertyChanged();
             }
         }
+        [DefaultValue(null)]
         public CommonStringMatchFilter TitleFilter {
             get => this.titleFilter;
             set {
@@ -57,10 +69,23 @@
                 this.OnPropertyChanged();
             }
         }
+        [DefaultValue(null)]
+        public CommonStringMatchFilter ProcessFilter {
+            get => this.processFilter;
+            set
+            {
+                if (Equals(value, this.processFilter))
+                    return;
+
+                this.processFilter = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         public WindowFilter Copy() => new WindowFilter {
             ClassFilter = CopyableExtensions.Copy(this.ClassFilter),
             TitleFilter = CopyableExtensions.Copy(this.TitleFilter),
+            ProcessFilter = CopyableExtensions.Copy(this.ProcessFilter),
         };
     }
 }

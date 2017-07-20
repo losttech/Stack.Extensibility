@@ -2,12 +2,14 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Xml.Serialization;
     using LostTech.App.DataBinding;
 
     public abstract class StringMatchFilter<T> : NotifyPropertyChangedBase, IFilter<T>
     {
         string value;
 
+        [XmlAttribute]
         public string Value
         {
             get => this.value;
