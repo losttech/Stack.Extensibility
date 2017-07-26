@@ -7,7 +7,7 @@
     using PInvoke;
     using Win32Exception = System.ComponentModel.Win32Exception;
 
-    public sealed class WindowFilter : NotifyPropertyChangedBase, IFilter<IntPtr>, ICopyable<WindowFilter>
+    public sealed class WindowFilter : NotifyPropertyChangedBase, IFilter<IntPtr>, ICopyable<WindowFilter>, IWindowGroup
     {
         CommonStringMatchFilter classFilter;
         CommonStringMatchFilter titleFilter;

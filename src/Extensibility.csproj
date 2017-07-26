@@ -12,6 +12,8 @@
     <PackageProjectUrl>https://github.com/losttech/Stack.Extensibility</PackageProjectUrl>
     <RepositoryUrl>https://github.com/losttech/Stack.Extensibility.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/losttech/Stack.Extensibility/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Lost Tech LLC 2017</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,10 +22,6 @@
     <PackageReference Include="PInvoke.User32" Version="0.5.86" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Filters\" />
   </ItemGroup>
 
 </Project>
