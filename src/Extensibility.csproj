@@ -4,7 +4,7 @@
     <TargetFramework>net462</TargetFramework>
     <AssemblyName>LostTech.Stack.Extensibility</AssemblyName>
     <RootNamespace>LostTech.Stack.Extensibility</RootNamespace>
-    <Version>0.1</Version>
+    <Version>0.1.1</Version>
     <Authors>Victor Milovanov</Authors>
     <Company>Lost Tech LLC</Company>
     <Product>Stack</Product>

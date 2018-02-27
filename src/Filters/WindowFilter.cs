@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Runtime.InteropServices;
     using LostTech.App.DataBinding;
     using PInvoke;
     using Win32Exception = System.ComponentModel.Win32Exception;
@@ -34,6 +35,12 @@
                     if (processID != 0) {
                         try {
                             Process process = Process.GetProcessById(processID);
+                            if (process.ProcessName == "ApplicationFrameHost") {
+                                processID = GetUwpProcessID(windowHandle);
+                                if (processID != 0)
+                                    process = Process.GetProcessById(processID);
+                            }
+
                             if (!this.ProcessFilter.Matches(process.ProcessName))
                                 return false;
                         } catch (ArgumentException) { } catch (InvalidOperationException) { }
@@ -48,6 +55,32 @@
 
             return true;
         }
+
+        [DllImport("user32", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool EnumChildWindows(IntPtr hWndParent, User32.WNDENUMPROC lpEnumFunc, IntPtr lParam);
+
+        /// <summary>
+        /// Find child process for uwp apps, edge, mail, etc.
+        /// </summary>
+        static int GetUwpProcessID(IntPtr hostWindowHandle) {
+            User32.GetWindowThreadProcessId(hostWindowHandle, out var hostPID);
+            if (hostPID == 0)
+                return 0;
+
+            int result = 0;
+            EnumChildWindows(hostWindowHandle, (child, _) => {
+                User32.GetWindowThreadProcessId(child, out var childPID);
+                if (childPID != hostPID && childPID != 0) {
+                    result = childPID;
+                    return false;
+                }
+                return true;
+            }, IntPtr.Zero);
+
+            return result;
+        }
+
         /// <summary>
         /// Filters windows by window class (Win32 only).
         /// </summary>
