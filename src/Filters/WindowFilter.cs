@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Text;
     using LostTech.App.DataBinding;
     using PInvoke;
     using Win32Exception = System.ComponentModel.Win32Exception;
@@ -128,5 +129,16 @@
             TitleFilter = CopyableExtensions.Copy(this.TitleFilter),
             ProcessFilter = CopyableExtensions.Copy(this.ProcessFilter),
         };
+
+        public override string ToString() {
+            var result = new StringBuilder();
+            if (!this.processFilter.MatchesAnything())
+                result.Append($"proc: {this.processFilter.Value}; ");
+            if (!this.TitleFilter.MatchesAnything())
+                result.Append($"win: {this.titleFilter.Value}; ");
+            if (!this.classFilter.MatchesAnything())
+                result.Append($"cls: {this.classFilter.Value};");
+            return result.ToString();
+        }
     }
 }
