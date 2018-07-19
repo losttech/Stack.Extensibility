@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
     <PackageReference Include="LostTech.App.DataBinding" Version="0.1.0" />
-    <PackageReference Include="PInvoke.User32" Version="0.5.126" />
+    <PackageReference Include="PInvoke.User32" Version="0.5.155" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
