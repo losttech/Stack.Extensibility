@@ -43,10 +43,10 @@
             foreach (var window in this.allWindows) {
                 try {
                     if (!window.IsVisibleInAppSwitcher)
-                        return;
+                        continue;
 
                     if (!filter.Matches(window))
-                        return;
+                        continue;
 
                     this.windowManager.Move(window, target).Wait();
                 } catch (WindowNotFoundException) { }
