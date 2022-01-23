@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <AssemblyName>LostTech.Stack.Extensibility.Tests.Integration</AssemblyName>
     <RootNamespace>LostTech.Stack.Extensibility</RootNamespace>
   </PropertyGroup>

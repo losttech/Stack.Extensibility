@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <AssemblyName>LostTech.Stack.Extensibility</AssemblyName>
-    <TargetFramework>net462</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>LostTech.Stack.Extensibility</RootNamespace>
     <VersionPrefix>0.2.0</VersionPrefix>
@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/losttech/Stack.Extensibility.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/losttech/Stack.Extensibility/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Lost Tech LLC 2020</Copyright>
+    <Copyright>Lost Tech LLC 2022</Copyright>
 
     <!-- The following is recommended for public projects -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
