@@ -35,7 +35,8 @@
                     User32.GetWindowThreadProcessId(windowHandle, out int processID);
                     if (processID != 0) {
                         try {
-                            Process process = Process.GetProcessById(processID);
+                            var process = Process.GetProcessById(processID);
+                            if (process is null) return false;
                             if (process.ProcessName == "ApplicationFrameHost") {
                                 processID = GetUwpProcessID(windowHandle);
                                 if (processID != 0)
