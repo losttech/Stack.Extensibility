@@ -4,6 +4,7 @@
     <TargetFramework>net48</TargetFramework>
     <AssemblyName>LostTech.Stack.Extensibility.Samples</AssemblyName>
     <RootNamespace>LostTech.Stack</RootNamespace>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
