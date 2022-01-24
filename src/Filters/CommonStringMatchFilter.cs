@@ -40,6 +40,13 @@
             Value = this.Value,
         };
 
+        public void CopyTo(CommonStringMatchFilter other) {
+            if (other is null) throw new ArgumentNullException(nameof(other));
+
+            other.Match = this.Match;
+            other.Value = this.Value;
+        }
+
         /// <summary>
         /// Matching mode. Default is <see cref="MatchOption.Anywhere"/>
         /// </summary>

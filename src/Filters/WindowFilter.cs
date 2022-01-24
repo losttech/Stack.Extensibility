@@ -17,70 +17,22 @@
 
         public bool Matches(IntPtr windowHandle)
         {
-            try
-            {
-                if (!this.ClassFilter.MatchesAnything()) {
-                    string className = User32.GetClassName(windowHandle, maxLength: 4096);
-                    if (!this.ClassFilter!.Matches(className))
-                        return false;
-                }
-
-                if (!this.TitleFilter.MatchesAnything()) {
-                    string title = User32.GetWindowText(windowHandle);
-                    if (!this.TitleFilter!.Matches(title))
-                        return false;
-                }
-
-                if (!this.ProcessFilter.MatchesAnything()) {
-                    User32.GetWindowThreadProcessId(windowHandle, out int processID);
-                    if (processID != 0) {
-                        try {
-                            var process = Process.GetProcessById(processID);
-                            if (process is null) return false;
-                            if (process.ProcessName == "ApplicationFrameHost") {
-                                processID = GetUwpProcessID(windowHandle);
-                                if (processID != 0)
-                                    process = Process.GetProcessById(processID);
-                            }
-
-                            if (!this.ProcessFilter!.Matches(process.ProcessName))
-                                return false;
-                        } catch (ArgumentException) { } catch (InvalidOperationException) { }
-                    }
-                }
+            if (this.ClassFilter is not null) {
+                if (!new Win32Class().From(this.ClassFilter).Matches(windowHandle))
+                    return false;
             }
-            catch (Win32Exception e)
-            {
-                Debug.WriteLine($"Can't obtain window class, title or process name: {e}");
-                return false;
+
+            if (this.TitleFilter is not null) {
+                if (!new Title().From(this.TitleFilter).Matches(windowHandle))
+                    return false;
+            }
+
+            if (this.ProcessFilter is not null) {
+                if (!new ProcessName().From(this.ProcessFilter).Matches(windowHandle))
+                    return false;
             }
 
             return true;
-        }
-
-        [DllImport("user32", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool EnumChildWindows(IntPtr hWndParent, User32.WNDENUMPROC lpEnumFunc, IntPtr lParam);
-
-        /// <summary>
-        /// Find child process for uwp apps, edge, mail, etc.
-        /// </summary>
-        static int GetUwpProcessID(IntPtr hostWindowHandle) {
-            User32.GetWindowThreadProcessId(hostWindowHandle, out var hostPID);
-            if (hostPID == 0)
-                return 0;
-
-            int result = 0;
-            EnumChildWindows(hostWindowHandle, (child, _) => {
-                User32.GetWindowThreadProcessId(child, out var childPID);
-                if (childPID != hostPID && childPID != 0) {
-                    result = childPID;
-                    return false;
-                }
-                return true;
-            }, IntPtr.Zero);
-
-            return result;
         }
 
         /// <summary>
