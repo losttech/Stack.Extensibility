@@ -11,9 +11,9 @@
 
     public sealed class WindowFilter : NotifyPropertyChangedBase, IFilter<IntPtr>, ICopyable<WindowFilter>, IWindowGroup
     {
-        CommonStringMatchFilter classFilter;
-        CommonStringMatchFilter titleFilter;
-        CommonStringMatchFilter processFilter;
+        CommonStringMatchFilter? classFilter;
+        CommonStringMatchFilter? titleFilter;
+        CommonStringMatchFilter? processFilter;
 
         public bool Matches(IntPtr windowHandle)
         {
@@ -21,13 +21,13 @@
             {
                 if (!this.ClassFilter.MatchesAnything()) {
                     string className = User32.GetClassName(windowHandle, maxLength: 4096);
-                    if (!this.ClassFilter.Matches(className))
+                    if (!this.ClassFilter!.Matches(className))
                         return false;
                 }
 
                 if (!this.TitleFilter.MatchesAnything()) {
                     string title = User32.GetWindowText(windowHandle);
-                    if (!this.TitleFilter.Matches(title))
+                    if (!this.TitleFilter!.Matches(title))
                         return false;
                 }
 
@@ -43,7 +43,7 @@
                                     process = Process.GetProcessById(processID);
                             }
 
-                            if (!this.ProcessFilter.Matches(process.ProcessName))
+                            if (!this.ProcessFilter!.Matches(process.ProcessName))
                                 return false;
                         } catch (ArgumentException) { } catch (InvalidOperationException) { }
                     }
@@ -87,7 +87,7 @@
         /// Filters windows by window class (Win32 only).
         /// </summary>
         [DefaultValue(null)]
-        public CommonStringMatchFilter ClassFilter {
+        public CommonStringMatchFilter? ClassFilter {
             get => this.classFilter;
             set {
                 if (Equals(value, this.classFilter))
@@ -100,7 +100,7 @@
         /// Filters windows by their title.
         /// </summary>
         [DefaultValue(null)]
-        public CommonStringMatchFilter TitleFilter {
+        public CommonStringMatchFilter? TitleFilter {
             get => this.titleFilter;
             set {
                 if (Equals(value, this.titleFilter))
@@ -113,7 +113,7 @@
         /// Filters windows by their process name.
         /// </summary>
         [DefaultValue(null)]
-        public CommonStringMatchFilter ProcessFilter {
+        public CommonStringMatchFilter? ProcessFilter {
             get => this.processFilter;
             set
             {
@@ -134,11 +134,11 @@
         public override string ToString() {
             var result = new StringBuilder();
             if (!this.processFilter.MatchesAnything())
-                result.Append($"proc: {this.processFilter.Value}; ");
+                result.Append($"proc: {this.processFilter!.Value}; ");
             if (!this.TitleFilter.MatchesAnything())
-                result.Append($"win: {this.titleFilter.Value}; ");
+                result.Append($"win: {this.titleFilter!.Value}; ");
             if (!this.classFilter.MatchesAnything())
-                result.Append($"cls: {this.classFilter.Value};");
+                result.Append($"cls: {this.classFilter!.Value};");
             return result.ToString();
         }
     }

@@ -10,7 +10,7 @@
     public class CommonStringMatchFilter : StringMatchFilter<string>, ICopyable<CommonStringMatchFilter>
     {
         MatchOption match;
-        Regex regex;
+        Regex? regex;
 
         public override bool Matches(string value)
         {
@@ -19,15 +19,16 @@
 
             switch (this.match) {
             case MatchOption.Anywhere:
-                return value.Contains(this.Value);
+                return value.Contains(this.Value ?? string.Empty);
             case MatchOption.Exact:
                 return value == this.Value;
             case MatchOption.Prefix:
-                return value.StartsWith(this.Value);
+                return value.StartsWith(this.Value ?? string.Empty);
             case MatchOption.Suffix:
-                return value.EndsWith(this.Value);
+                return value.EndsWith(this.Value ?? string.Empty);
             case MatchOption.Regex:
-                this.regex = this.regex ?? new Regex(this.Value);
+                if (this.Value is null) return true;
+                this.regex ??= new Regex(this.Value);
                 return this.regex.IsMatch(value);
             default:
                 return false;
@@ -69,7 +70,7 @@
 
     public static class CommonStringMatchFilterExtensions
     {
-        public static bool MatchesAnything(this CommonStringMatchFilter filter) =>
+        public static bool MatchesAnything(this CommonStringMatchFilter? filter) =>
             filter?.Value == null || filter.Value  == "" && filter.Match == CommonStringMatchFilter.MatchOption.Anywhere;
     }
 }

@@ -8,14 +8,14 @@
 
     public abstract class StringMatchFilter<T> : NotifyPropertyChangedBase, IFilter<T>
     {
-        string value;
+        string? value;
 
         /// <summary>
         /// String to search for
         /// </summary>
         [XmlAttribute]
         [DefaultValue(null)]
-        public string Value
+        public string? Value
         {
             get => this.value;
             set {
