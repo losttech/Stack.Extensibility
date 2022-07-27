@@ -14,7 +14,7 @@
     <PackageProjectUrl>https://github.com/losttech/Stack.Extensibility</PackageProjectUrl>
     <RepositoryUrl>https://github.com/losttech/Stack.Extensibility.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/losttech/Stack.Extensibility/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Copyright>Lost Tech LLC 2022</Copyright>
 
     <!-- The following is recommended for public projects -->
@@ -23,6 +23,10 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LostTech.App.DataBinding" Version="0.1.0" />

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensibility", "src\Extensibility.csproj", "{C345C31C-F416-42AC-8E25-FF49E7B8F1BA}"
 EndProject
@@ -10,9 +10,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repo", "Repo", "{2B2BE989-1111-4A62-9F47-C7DA141E45E7}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration", "tests\Integration\Integration.csproj", "{B0F006E0-8138-4D87-B011-090EAB6CF5C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration", "tests\Integration\Integration.csproj", "{B0F006E0-8138-4D87-B011-090EAB6CF5C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {520831BC-AFD1-4F32-AB40-5DAFDFD193E6}
 	EndGlobalSection
 EndGlobal
