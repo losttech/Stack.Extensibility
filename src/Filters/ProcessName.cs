@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 
 using PInvoke;
@@ -16,13 +17,16 @@ public sealed class ProcessName : CommonStringMatchFilter, IFilter<IntPtr> {
                 try {
                     var process = Process.GetProcessById(processID);
                     if (process is null) return false;
-                    if (process.ProcessName == "ApplicationFrameHost") {
+                    string name = GetName(process);
+                    if (name.EndsWith("\\ApplicationFrameHost.exe", StringComparison.InvariantCultureIgnoreCase)) {
                         processID = GetUwpProcessID(windowHandle);
-                        if (processID != 0)
+                        if (processID != 0) {
                             process = Process.GetProcessById(processID);
+                            name = GetName(process);
+                        }
                     }
 
-                    if (!this.Matches(process.ProcessName))
+                    if (!this.Matches(name))
                         return false;
                 } catch (ArgumentException) { } catch (InvalidOperationException) { }
             }
@@ -32,6 +36,11 @@ public sealed class ProcessName : CommonStringMatchFilter, IFilter<IntPtr> {
             Debug.WriteLine($"Can't obtain process name: {e}");
             return false;
         }
+    }
+
+    static string GetName(Process process) {
+        using var handle = new Kernel32.SafeObjectHandle(process.Handle, ownsHandle: false);
+        return Kernel32.QueryFullProcessImageName(handle, dwFlags: default);
     }
 
     /// <summary>
