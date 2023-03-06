@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <RootNamespace>LostTech.Stack.Extensibility</RootNamespace>
     <VersionPrefix>0.2.0</VersionPrefix>
-    <Authors>Victor Milovanov</Authors>
+    <Authors>Victor Nova</Authors>
     <Company>Lost Tech LLC</Company>
     <Product>Stack</Product>
     <Description>Extensibility library and tools for Stack window manager</Description>
@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/losttech/Stack.Extensibility.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Lost Tech LLC 2022</Copyright>
+    <Copyright>Lost Tech LLC 2023</Copyright>
 
     <!-- The following is recommended for public projects -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
