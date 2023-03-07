@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 
 using PInvoke;
@@ -17,12 +16,14 @@ public sealed class ProcessName : CommonStringMatchFilter, IFilter<IntPtr> {
                 try {
                     var process = Process.GetProcessById(processID);
                     if (process is null) return false;
-                    string name = GetName(process);
+                    string? name = GetName(process);
+                    if (name is null) return false;
                     if (name.EndsWith("\\ApplicationFrameHost.exe", StringComparison.InvariantCultureIgnoreCase)) {
                         processID = GetUwpProcessID(windowHandle);
                         if (processID != 0) {
                             process = Process.GetProcessById(processID);
                             name = GetName(process);
+                            if (name is null) return false;
                         }
                     }
 
@@ -38,9 +39,14 @@ public sealed class ProcessName : CommonStringMatchFilter, IFilter<IntPtr> {
         }
     }
 
-    static string GetName(Process process) {
-        using var handle = new Kernel32.SafeObjectHandle(process.Handle, ownsHandle: false);
-        return Kernel32.QueryFullProcessImageName(handle, dwFlags: default);
+    static string? GetName(Process process) {
+        try {
+            using var handle = new Kernel32.SafeObjectHandle(process.Handle, ownsHandle: false);
+            return Kernel32.QueryFullProcessImageName(handle, dwFlags: default);
+        } catch (System.ComponentModel.Win32Exception e)
+            when (e.NativeErrorCode == (int)Win32ErrorCode.ERROR_ACCESS_DENIED) {
+            return null;
+        }
     }
 
     /// <summary>
