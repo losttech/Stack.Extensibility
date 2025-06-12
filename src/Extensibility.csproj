@@ -20,8 +20,7 @@
     <!-- The following is recommended for public projects -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <DebugSymbols>true</DebugSymbols>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,12 +30,12 @@
   <ItemGroup>
     <PackageReference Include="LostTech.App.DataBinding" Version="0.1.0" />
     <PackageReference Include="LostTech.Stack.WindowManagement" Version="2.0.1" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="PInvoke.User32" Version="0.7.124" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
     <!-- The following is recommended for public projects -->
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
